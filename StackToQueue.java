@@ -7,7 +7,6 @@ public class StackToQueue {
     public static class Queue<T> {
         Stack<T> inStack = new Stack<>();
         Stack<T> outStack = new Stack<>();
-        T tmp = null;
 
         // add
         public T add(T data) {
@@ -17,30 +16,22 @@ public class StackToQueue {
 
         // poll
         public T poll() {
-            outStack.clear();
-            while(inStack.size() > 0) {
-                outStack.add(inStack.pop());
+            if(outStack.isEmpty()) {
+                while(inStack.size() > 0) {
+                    outStack.add(inStack.pop());
+                }
             }
-
-            tmp = outStack.pop();
-            while(outStack.size() > 0) {
-                inStack.add(outStack.pop());
-            }
-            return tmp;
+            return outStack.pop();
         }
 
         // peek
         public T peek() {
-            outStack.clear();
-            while(inStack.size() > 0) {
-                outStack.add(inStack.pop());
+            if(outStack.isEmpty()) {
+                while(inStack.size() > 0) {
+                    outStack.add(inStack.pop());
+                }
             }
-
-            tmp = outStack.peek();
-            while (outStack.size() > 0) {
-                inStack.add(outStack.pop());
-            }
-            return tmp;
+            return outStack.peek();
         }
 
         // clear
